@@ -13,8 +13,10 @@ import {
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import './HeroScroll.css';
 
-const KEYFRAME = '/references/hero-keyframe-start.png';
-const MOTION_VIDEO = '/references/hero-motion-reference.mp4';
+const base = import.meta.env.BASE_URL;
+
+const KEYFRAME = `${base}references/hero-keyframe-start.png`;
+const MOTION_VIDEO = `${base}references/hero-motion-reference.mp4`;
 
 function getScrollHeightVh() {
   const w = window.innerWidth;
