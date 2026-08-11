@@ -31,7 +31,7 @@ jobs:
       - name: Install and build
         working-directory: web
         env:
-          VITE_BASE_PATH: /Robot-3D-Scroll/
+          VITE_BASE_PATH: /Robot-interactive-webpage/
         run: |
           npm ci
           npm run build

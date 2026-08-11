@@ -9,7 +9,7 @@ npm run dev
 Open **http://localhost:5173**
 
 **Production URL (GitHub Pages):**  
-https://ramya-rajasekaran1.github.io/Robot-3D-Scroll/
+https://ramya-rajasekaran1.github.io/Robot-interactive-webpage/
 
 Pushes to `main` run [.github/workflows/deploy-pages.yml](../.github/workflows/deploy-pages.yml).  
 In the repo on GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions** (once).
@@ -22,6 +22,6 @@ Local production build matching Pages:
 
 ```bash
 cd web
-VITE_BASE_PATH=/Robot-3D-Scroll/ npm run build
+VITE_BASE_PATH=/Robot-interactive-webpage/ npm run build
 npm run preview
 ```
