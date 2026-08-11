@@ -82,14 +82,6 @@ export function computeScrollProgress(section: HTMLElement): number {
 function seekVideo(video: HTMLVideoElement, time: number) {
   const t = Math.max(0, Math.min(time, video.duration || time));
   if (Number.isFinite(t) && Math.abs(video.currentTime - t) > 0.01) {
-    if (typeof video.fastSeek === 'function') {
-      try {
-        video.fastSeek(t);
-        return;
-      } catch {
-        /* fall through */
-      }
-    }
     video.currentTime = t;
   }
 }

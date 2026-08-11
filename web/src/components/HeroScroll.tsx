@@ -187,6 +187,13 @@ export function HeroScroll() {
         el.style.opacity = String(reveal.line1 > 0.02 ? 1 : 0);
       }
 
+      const railProgress = identityRef.current
+        ?.closest('.hero-stage')
+        ?.querySelector<HTMLElement>('.hero-rail__progress');
+      if (railProgress) {
+        railProgress.style.transform = `scaleY(${Math.max(0.08, smooth)})`;
+      }
+
       raf = requestAnimationFrame(tick);
     };
 
@@ -235,6 +242,21 @@ export function HeroScroll() {
               fetchPriority="high"
             />
           </div>
+
+          <aside className="hero-rail" aria-hidden="true">
+            <span className="hero-rail__mark">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path
+                  d="M12 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm-6 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm12 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm-6 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+            <span className="hero-rail__track">
+              <span className="hero-rail__progress" />
+            </span>
+            <span className="hero-rail__avatar" />
+          </aside>
 
           <div ref={identityRef} className="hero-identity">
             <h1 data-line="1" className="hero-identity__name">
