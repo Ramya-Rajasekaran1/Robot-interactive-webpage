@@ -1,15 +1,15 @@
 /** Scroll progress 0–1: video scrub + identity reveal timing. */
 
 export const scrollDuration = {
-  desktop: 420,
-  tablet: 360,
-  mobile: 300,
+  desktop: 800,
+  tablet: 700,
+  mobile: 500,
 } as const;
 
 /** Still → video crossfade on load (ms) */
 export const introCrossfadeMs = 3200;
 
-export const progressSmoothing = 0.12;
+export const progressSmoothing = 0.08;
 
 export const videoScroll = {
   start: 0.03,
@@ -17,7 +17,7 @@ export const videoScroll = {
 } as const;
 
 /** Video clock catch-up (higher = more responsive to scroll) */
-export const videoTimeSmoothing = 0.16;
+export const videoTimeSmoothing = 0.06;
 
 function clamp01(t: number) {
   return Math.min(1, Math.max(0, t));

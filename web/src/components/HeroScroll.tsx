@@ -5,7 +5,6 @@ import {
   introCrossfadeMs,
   mapScrollToVideoTime,
   progressSmoothing,
-  sampleTextReveal,
   scrollDuration,
   seekVideo,
   videoTimeSmoothing,
@@ -37,7 +36,7 @@ export function HeroScroll() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const posterRef = useRef<HTMLImageElement>(null);
-  const identityRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(reduced ? 1 : 0);
   const [videoReady, setVideoReady] = useState(false);
 
@@ -179,17 +178,7 @@ export function HeroScroll() {
         seekVideo(video, smoothVideoTimeRef.current);
       }
 
-      const reveal = sampleTextReveal(smooth);
-      const root = identityRef.current;
-      const el = root?.querySelector<HTMLElement>('[data-line="1"]');
-      if (el) {
-        el.style.setProperty('--reveal', String(reveal.line1));
-        el.style.opacity = String(reveal.line1 > 0.02 ? 1 : 0);
-      }
-
-      const railProgress = identityRef.current
-        ?.closest('.hero-stage')
-        ?.querySelector<HTMLElement>('.hero-rail__progress');
+      const railProgress = stageRef.current?.querySelector<HTMLElement>('.hero-rail__progress');
       if (railProgress) {
         railProgress.style.transform = `scaleY(${Math.max(0.08, smooth)})`;
       }
@@ -205,12 +194,6 @@ export function HeroScroll() {
     if (!reduced) return;
     const poster = posterRef.current;
     if (poster) poster.style.opacity = '1';
-    const root = identityRef.current;
-    const el = root?.querySelector<HTMLElement>('[data-line="1"]');
-    if (el) {
-      el.style.setProperty('--reveal', '1');
-      el.style.opacity = '1';
-    }
   }, [reduced]);
 
   const showCue = !reduced && scrollProgress < 0.06;
@@ -218,7 +201,7 @@ export function HeroScroll() {
   return (
     <section ref={sectionRef} className="hero-scroll" aria-label="Introduction">
       <div className="hero-scroll__pin">
-        <div className="hero-stage">
+        <div ref={stageRef} className="hero-stage">
           <div className="hero-media">
             {!reduced && (
               <video
@@ -258,11 +241,7 @@ export function HeroScroll() {
             <span className="hero-rail__avatar" />
           </aside>
 
-          <div ref={identityRef} className="hero-identity">
-            <h1 data-line="1" className="hero-identity__name">
-              <span className="hero-identity__inner">Cal AI robot</span>
-            </h1>
-          </div>
+
 
           {!reduced && (
             <p
