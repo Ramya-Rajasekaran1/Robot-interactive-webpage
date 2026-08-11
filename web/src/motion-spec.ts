@@ -61,12 +61,12 @@ export function combinedPosterOpacity(
 
 export function sampleTextReveal(progress: number) {
   const p = clamp01(progress);
-  const text = phaseT(p, 0.72, 0.98);
+  const text = phaseT(p, 0.25, 0.48);
   const ease = smoothstep(text);
   return {
-    line1: clamp01(ease / 0.4),
-    line2: clamp01((ease - 0.28) / 0.4),
-    line3: clamp01((ease - 0.56) / 0.4),
+    line1: ease,
+    line2: ease,
+    line3: ease,
   };
 }
 
