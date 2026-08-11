@@ -50,6 +50,10 @@
   will-change: opacity;
 }
 
+
+
+
+
 @media (prefers-reduced-motion: reduce) {
   .hero-video {
     display: none;
@@ -159,20 +163,20 @@
   overflow: hidden;
   margin: 0;
   line-height: 1.08;
-  text-shadow: 0 2px 24px rgb(0 0 0 / 0.55);
+  text-shadow: none;
 }
 
 .hero-identity__name {
   font-size: clamp(2rem, 5vw, 3.75rem);
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: #f4f6fa;
+  color: #000000;
 }
 
 .hero-identity__role {
   font-size: clamp(1rem, 2.2vw, 1.35rem);
   font-weight: 500;
-  color: rgb(244 246 250 / 0.92);
+  color: rgba(0, 0, 0, 0.85);
   margin-top: 0.35em;
 }
 
@@ -181,7 +185,7 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(244 246 250 / 0.72);
+  color: rgba(0, 0, 0, 0.65);
   margin-top: 0.65em;
 }
 

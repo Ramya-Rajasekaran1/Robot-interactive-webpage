@@ -43,7 +43,7 @@ export function HeroScroll() {
 
   const targetProgressRef = useRef(reduced ? 1 : 0);
   const smoothProgressRef = useRef(reduced ? 1 : 0);
-  const introBlendRef = useRef(reduced ? 1 : 0);
+  const introBlendRef = useRef(1);
   const introStartRef = useRef<number | null>(null);
   const durationRef = useRef(0);
   const smoothVideoTimeRef = useRef(0);
@@ -181,24 +181,10 @@ export function HeroScroll() {
 
       const reveal = sampleTextReveal(smooth);
       const root = identityRef.current;
-      (
-        [
-          ['1', reveal.line1],
-          ['2', reveal.line2],
-          ['3', reveal.line3],
-        ] as const
-      ).forEach(([id, t]) => {
-        const el = root?.querySelector<HTMLElement>(`[data-line="${id}"]`);
-        if (!el) return;
-        el.style.setProperty('--reveal', String(t));
-        el.style.opacity = String(t > 0.02 ? 1 : 0);
-      });
-
-      const railProgress = identityRef.current
-        ?.closest('.hero-stage')
-        ?.querySelector<HTMLElement>('.hero-rail__progress');
-      if (railProgress) {
-        railProgress.style.transform = `scaleY(${Math.max(0.08, smooth)})`;
+      const el = root?.querySelector<HTMLElement>('[data-line="1"]');
+      if (el) {
+        el.style.setProperty('--reveal', String(reveal.line1));
+        el.style.opacity = String(reveal.line1 > 0.02 ? 1 : 0);
       }
 
       raf = requestAnimationFrame(tick);
@@ -213,12 +199,11 @@ export function HeroScroll() {
     const poster = posterRef.current;
     if (poster) poster.style.opacity = '1';
     const root = identityRef.current;
-    ['1', '2', '3'].forEach((id) => {
-      const el = root?.querySelector<HTMLElement>(`[data-line="${id}"]`);
-      if (!el) return;
+    const el = root?.querySelector<HTMLElement>('[data-line="1"]');
+    if (el) {
       el.style.setProperty('--reveal', '1');
       el.style.opacity = '1';
-    });
+    }
   }, [reduced]);
 
   const showCue = !reduced && scrollProgress < 0.06;
@@ -251,31 +236,10 @@ export function HeroScroll() {
             />
           </div>
 
-          <aside className="hero-rail" aria-hidden="true">
-            <span className="hero-rail__mark">
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                <path
-                  d="M12 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm-6 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm12 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm-6 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </span>
-            <span className="hero-rail__track">
-              <span className="hero-rail__progress" />
-            </span>
-            <span className="hero-rail__avatar" />
-          </aside>
-
           <div ref={identityRef} className="hero-identity">
             <h1 data-line="1" className="hero-identity__name">
-              <span className="hero-identity__inner">Ramya Rajasekaran</span>
+              <span className="hero-identity__inner">Cal AI robot</span>
             </h1>
-            <p data-line="2" className="hero-identity__role">
-              <span className="hero-identity__inner">Senior Product Designer</span>
-            </p>
-            <p data-line="3" className="hero-identity__org">
-              <span className="hero-identity__inner">Cal AI Labs</span>
-            </p>
           </div>
 
           {!reduced && (
